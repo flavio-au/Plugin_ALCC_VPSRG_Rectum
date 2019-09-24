@@ -50,8 +50,6 @@ namespace VMS.TPS
             List<Tuple<String, Structure>> selected_structs = new List<Tuple<String, Structure>>(); 
             // Next: List of code, label, ALCC-ID for searching structures top export
             List<Tuple<String, String, String>> lst_struct_to_search = new List<Tuple<String, String, String>>();
-            // list of struct to report only - need the full list
-            List<Tuple<String, String, String>> lst_struct_to_report = new List<Tuple<String, String, String>>();
             SelectOneStruct selectOneStruct;
             IEnumerable<Structure> set_of_structs;
             IEnumerable<Structure> partial_set_of_structs;
@@ -362,21 +360,15 @@ namespace VMS.TPS
             lst_struct_to_search.Add(Tuple.Create("45643", "Genitalia External", "Ext Gen"));
             lst_struct_to_search.Add(Tuple.Create("15703", "Anal Canal", "Anal Canal"));
             lst_struct_to_search.Add(Tuple.Create("PTV_High", "PTV High Risk", "PTV 54")); // PTV High
-            // list of struct to report only
-            lst_struct_to_report = lst_struct_to_search;
             if (num_of_ptvs == 2) // PTV High + PTV Low ONLY
             { lst_struct_to_search.Add(Tuple.Create("PTV_Low", "PTV Low Risk", "IP PTV 45")); } 
             if (num_of_ptvs == 3) // PTV High + PTV Int + PTV Low
             { lst_struct_to_search.Add(Tuple.Create("PTV_Intermediate", "PTV Intermediate Risk", "IP PTV 50.4"));
               lst_struct_to_search.Add(Tuple.Create("PTV_Low", "PTV Low Risk", "IP PTV 45"));
-            }
-            // list of struct to report only - I need full list for comply to excel columns
-            lst_struct_to_report.Add(Tuple.Create("PTV_Intermediate", "PTV Intermediate Risk", "IP PTV 50.4"));
-            lst_struct_to_report.Add(Tuple.Create("PTV_Low", "PTV Low Risk", "IP PTV 45"));
-
+            } 
 
             // **** Start searching for structures
-
+            
             // First define the collection of strcutures
             if (my_plan is PlanSetup)
             {
@@ -1145,12 +1137,19 @@ namespace VMS.TPS
             VPSRG_Rectum_txt = VPSRG_Rectum_txt + num_of_ptvs.ToString() + ", , , ";// Skip CB-CC
 
             // Name of selected structures CD-CO
-            foreach (var n in lst_struct_to_report)
+            foreach (var n in lst_struct_to_search)
             {
                 if (selected_structs.Where(t => t.Item1 == n.Item2).Any())
                 {
                     this_strct = selected_structs.Where(t => t.Item1 == n.Item2).First().Item2;
-                    VPSRG_Rectum_txt = VPSRG_Rectum_txt + this_strct.Name + ", ";
+                    if (num_of_ptvs == 2 && n.Item2== "PTV High Risk") // PTV High + PTV Low ONLY
+                    {
+                        VPSRG_Rectum_txt = VPSRG_Rectum_txt + this_strct.Name + ", , ";
+                    }
+                    else
+                    {
+                        VPSRG_Rectum_txt = VPSRG_Rectum_txt + this_strct.Name + ", ";
+                    }
                 }
                 else
                 {
