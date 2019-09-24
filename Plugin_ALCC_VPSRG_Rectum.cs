@@ -27,8 +27,6 @@ namespace VMS.TPS
     //  {
     // and uncoment following
 
-    
-
     /// <summary>
     /// Plugin_ALCC_VPSRG_Rectum runs as binary script on Eclipse. It requires a patient open on the context.
     /// Promts for course and plan selection (prepared for VicRaplidPlan Rectum) and produces an xml file
