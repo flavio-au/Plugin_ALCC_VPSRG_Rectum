@@ -9,7 +9,7 @@
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Plugin_ALCC_VPSRG_Rectum</RootNamespace>
-    <AssemblyName>Plugin_ALCC_VPSRG_Rectum_v1.5.esapi</AssemblyName>
+    <AssemblyName>Plugin_ALCC_VPSRG_Rectum_v1.0.esapi</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
