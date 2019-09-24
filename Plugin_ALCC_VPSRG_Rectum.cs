@@ -97,7 +97,7 @@ namespace VMS.TPS
             DoseValue Rel_Dose = new DoseValue(0.0, "%");
             bool flag; // a boolean for control
             double bin = 0.01; // for binning the DVHs, this values is for plans in Gy
-            bool alcc_flag=(my_patient.Hospital.Id=="Barwon Hell"); // a flag for using ALCC-Ids
+            bool alcc_flag=(my_patient.Hospital.Id=="Barwon Health"); // a flag for using ALCC-Ids
             String Rapidplan_version;
 
             //** Change or preserve Patient Record UR
